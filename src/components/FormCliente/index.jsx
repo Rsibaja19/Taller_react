@@ -161,7 +161,7 @@ const index = ({ cliente, clientes, setClientes, editCliente, setEditCliente }) 
 
               <input
                 type="submit"
-                value={`${cliente.id ? "Edit client" : "Add client"}`}
+                value={`${cliente.id ? "Editar cliente" : "Agregar cliente"}`}
                 className="w-full bg-blue-800 p-3 uppercase text-white text-lg cursor-pointer"
               />
             </Form>
