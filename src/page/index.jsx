@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const index = () => {
   return (
-    <div>This page principal</div>
-  )
-}
+    <div className="container-1440">
+      <h1>Good Practics</h1>
+    </div>
+  );
+};
 
-export default index
+export default index;
