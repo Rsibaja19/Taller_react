@@ -6,16 +6,27 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import Alert from "../Alerta";
 
-const index = ({ cliente, clientes, setClientes, editCliente, setEditCliente }) => {
+const index = ({
+  cliente,
+  clientes,
+  setClientes,
+  editCliente,
+  setEditCliente,
+}) => {
   const uniqueId = uuidv4();
   const validarCliente = Yup.object().shape({
     nombre: Yup.string()
       .min(3, "El nombre es demasiado corto")
-      .max(40, "El nombre es demasiado largo")
-      .required().typeError("El nombre es requerido"),
-    edad: Yup.string().max(2, "Ingrese una edad correcta").required().typeError("La edad es requerida"),
-    sexo: Yup.string().required().typeError("El sexo es requerido"),
+      .max(20, "El nombre es demasiado largo")
+      .required()
+      .typeError("El nombre es requerido"),
+    apellido: Yup.string()
+      .min(3, "El apellido es demasiado corto")
+      .max(20, "El apellido es demasiado largo")
+      .required()
+      .typeError("El nombre es requerido"),
     email: Yup.string().email().required(),
+    barrio: Yup.string(),
     direccion: Yup.string(),
     telefono: Yup.number()
       .positive()
@@ -31,22 +42,23 @@ const index = ({ cliente, clientes, setClientes, editCliente, setEditCliente }) 
       Swal.fire({
         icon: "success",
         timer: 1500,
+        showConfirmButton: false,
         text: "Cliente agregado exitosamente!",
       });
       values.id = uniqueId;
-      setClientes([...clientes, values])
+      setClientes([...clientes, values]);
     }
   };
   return (
-    <div className="mb-10 md:mb-0 mx-auto lg:w-3/4 xl:w-2/4">
+    <div className="lg:w-3/5 mx-5 mb-5">
       <div className="bg-white px-5 py-10 rounded-md shadow-md m-auto">
         <Formik
           initialValues={{
             nombre: cliente?.nombre ?? "",
-            edad: cliente?.edad ?? "",
-            sexo: cliente?.sexo ?? "",
+            apellido: cliente?.apellido ?? "",
             email: cliente?.email ?? "",
             telefono: cliente?.telefono ?? "",
+            barrio: cliente?.barrio ?? "",
             direccion: cliente?.direccion ?? "",
             notas: cliente?.notas ?? "",
           }}
@@ -74,31 +86,17 @@ const index = ({ cliente, clientes, setClientes, editCliente, setEditCliente }) 
                 ) : null}
               </div>
               <div className="mb-4">
-                <label className="text-gray-800 mb-2" htmlFor="edad">
-                  Edad:
+                <label className="text-gray-800 mb-2" htmlFor="apellido">
+                  Apellido:
                 </label>
                 <Field
                   type="text"
-                  name="edad"
+                  name="apellido"
                   className="block w-full p-3 bg-gray-50 outline-none"
-                  placeholder="Ingresa la edad del cliente"
+                  placeholder="Ingresa el apellido del cliente"
                 />
-                {errors.edad && touched.edad ? (
-                  <Alert>{errors.edad}</Alert>
-                ) : null}
-              </div>
-              <div className="mb-4">
-                <label className="text-gray-800 mb-2" htmlFor="sexo">
-                  Sexo:
-                </label>
-                <Field
-                  type="text"
-                  name="sexo"
-                  className="block w-full p-3 bg-gray-50 outline-none"
-                  placeholder="Ingrese el sexo del cliente"
-                />
-                {errors.sexo && touched.sexo ? (
-                  <Alert>{errors.sexo}</Alert>
+                {errors.apellido && touched.apellido ? (
+                  <Alert>{errors.apellido}</Alert>
                 ) : null}
               </div>
               <div className="mb-4">
@@ -127,6 +125,20 @@ const index = ({ cliente, clientes, setClientes, editCliente, setEditCliente }) 
                 />
                 {errors.telefono && touched.telefono ? (
                   <Alert>{errors.telefono}</Alert>
+                ) : null}
+              </div>
+              <div className="mb-4">
+                <label className="text-gray-800 mb-2" htmlFor="barrio">
+                  Barrio:
+                </label>
+                <Field
+                  type="text"
+                  name="barrio"
+                  className="block w-full p-3 bg-gray-50 outline-none"
+                  placeholder="Ingrese el barrio del cliente"
+                />
+                {errors.barrio && touched.barrio ? (
+                  <Alert>{errors.barrio}</Alert>
                 ) : null}
               </div>
               <div className="mb-4">
