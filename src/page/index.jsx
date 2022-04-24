@@ -7,9 +7,9 @@ const index = () => {
   const [clientes, setClientes] = useState([]);
   const [editCliente, setEditCliente] = useState({});
   return (
-    <div className="container-1440 mx-auto mt-5">
+    <div className="container-1440">
       <Header />
-      <div className="mt-5 xl:flex justify-center pb-4 scroll">
+      <div className="mt-3 lg:flex justify-center gap-3">
         <Formulario
           clientes={clientes}
           setClientes={setClientes}
