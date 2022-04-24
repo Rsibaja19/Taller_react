@@ -1,37 +1,55 @@
 import React from "react";
-import { RiFileEditFill } from "react-icons/ri";
-import { AiFillDelete } from "react-icons/ai";
-import { HiEye } from "react-icons/hi";
 
 const index = ({ cliente, setEditCliente, eliminarCliente }) => {
   return (
     <>
-      <tbody>
-        <tr
-          className="text-center border-b hover:bg-gray-50 cursor-pointer"
-          key={cliente.id}
-        >
-          <td className="p-3">{cliente.nombre}</td>
-          <td className="p-3">{cliente.email}</td>
-          <td className="p-3">{cliente.telefono}</td>
-          <td className="p-3">
-            <div className="flex justify-center items-center">
-              <HiEye
-                className="text-yellow-500 hover:text-yellow-600 cursor-pointer text-xl"
-                onClick={() => onViewClient(cliente.id)}
-              />
-              <RiFileEditFill
-                className="text-blue-500 hover:text-blue-700 cursor-pointer text-xl"
-                onClick={() => setEditCliente(cliente.id)}
-              />
-              <AiFillDelete
-                className="text-red-500 hover:text-red-700 cursor-pointer text-xl"
-                onClick={() => eliminarCliente(cliente.id)}
-              />
-            </div>
-          </td>
-        </tr>
-      </tbody>
+      <div className="mb-3 bg-white shadow-md px-5 py-5 rounded-xl">
+        <p className="font-bold mb-3 text-gray-700 uppercase">
+          Nombre:
+          <span className="normal-case font-normal">
+            {" "}
+            {cliente?.nombre} {cliente?.apellido}
+          </span>
+        </p>
+        <p className="font-bold mb-3 text-gray-700 uppercase">
+          Numero:
+          <span className="normal-case font-normal"> {cliente?.telefono}</span>
+        </p>
+        <p className="font-bold mb-3 text-gray-700 uppercase">
+          Barrio:
+          <span className="normal-case font-normal"> {cliente?.barrio}</span>
+        </p>
+        <p className="font-bold mb-3 text-gray-700 uppercase">
+          Direccion:
+          <span className="normal-case font-normal"> {cliente?.direccion}</span>
+        </p>
+        <p className="font-bold mb-3 text-gray-700 uppercase">
+          Email:
+          <span className="normal-case font-normal"> {cliente?.email}</span>
+        </p>
+        {cliente?.notas ? (
+          <p className="font-bold mb-3 text-gray-700 uppercase">
+            Notas:
+            <span className="normal-case font-normal"> {cliente?.notas}</span>
+          </p>
+        ) : null}
+        <div className="flex items-center justify-between mt-5">
+          <button
+            type="button"
+            onClick={() => setEditCliente(cliente)}
+            className="py-2 px-5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold uppercase rounded-lg transition-all"
+          >
+            editar
+          </button>
+          <button
+            type="button"
+            onClick={() => eliminarCliente(cliente?.id)}
+            className="py-2 px-5 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-lg transition-all"
+          >
+            eliminar
+          </button>
+        </div>
+      </div>
     </>
   );
 };
