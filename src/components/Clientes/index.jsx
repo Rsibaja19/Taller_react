@@ -1,6 +1,6 @@
 import React from "react";
 import Swal from "sweetalert2";
-import Table from "../Table";
+import Card from "../Card";
 
 const index = ({ clientes, setClientes, setEditCliente }) => {
   const eliminarCliente = (id) => {
@@ -42,7 +42,7 @@ const index = ({ clientes, setClientes, setEditCliente }) => {
         <div className="lg:w-3/5">
           <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
             {clientes.map((cliente) => (
-              <Table
+              <Card
                 key={cliente.id}
                 cliente={cliente}
                 setEditCliente={setEditCliente}
